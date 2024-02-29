@@ -1,19 +1,19 @@
-import { SanityDocument } from "next-sanity";
-import { draftMode } from "next/headers";
-import Image from "next/image";
+import { SanityDocument } from 'next-sanity';
+import { draftMode } from 'next/headers';
+import Image from 'next/image';
 
-import Posts from "@/components/Posts";
-import PostPreview from "@/components/PostPreview";
-import { loadQuery } from "@/sanity/lib/store";
-import { POSTS_QUERY } from "@/sanity/lib/queries";
+import Posts from '@/components/Posts';
+import PostPreview from '@/components/PostPreview';
+import { loadQuery } from '@/sanity/lib/store';
+import { POSTS_QUERY } from '@/sanity/lib/queries';
 
 export default async function Home() {
   const initial = await loadQuery<SanityDocument[]>(
     POSTS_QUERY,
     {},
     {
-      perspective: draftMode().isEnabled ? "previewDrafts" : "published",
-    }
+      perspective: draftMode().isEnabled ? 'previewDrafts' : 'published',
+    },
   );
 
   return (

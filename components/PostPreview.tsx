@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { POSTS_QUERY } from "@/sanity/lib/queries";
-import { QueryResponseInitial, useQuery } from "@sanity/react-loader";
-import { SanityDocument } from "next-sanity";
+import { POSTS_QUERY } from '@/sanity/lib/queries';
+import { QueryResponseInitial, useQuery } from '@sanity/react-loader';
+import { SanityDocument } from 'next-sanity';
 
-import Posts from "@/components/Posts";
+import Posts from '@/components/Posts';
 
 export default function PostsPreview({
   initial,
@@ -14,7 +14,7 @@ export default function PostsPreview({
   const { data } = useQuery<SanityDocument[] | null>(
     POSTS_QUERY,
     {},
-    { initial }
+    { initial },
   );
 
   return data ? (

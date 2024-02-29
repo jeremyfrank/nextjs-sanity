@@ -1,9 +1,9 @@
 // ./sanity/lib/store.ts
 
-import * as queryStore from "@sanity/react-loader";
+import * as queryStore from '@sanity/react-loader';
 
-import { client } from "@/sanity/lib/client";
-import { token } from "@/sanity/lib/token";
+import { client } from '@/sanity/lib/client';
+import { token } from '@/sanity/lib/token';
 
 queryStore.setServerClient(client.withConfig({ token }));
 
