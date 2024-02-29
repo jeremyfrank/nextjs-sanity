@@ -1,12 +1,20 @@
 import { SanityDocument } from "next-sanity";
+import { draftMode } from "next/headers";
 import Image from "next/image";
 
 import Posts from "@/components/Posts";
+import PostPreview from "@/components/PostPreview";
 import { loadQuery } from "@/sanity/lib/store";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 
 export default async function Home() {
-  const initial = await loadQuery<SanityDocument[]>(POSTS_QUERY);
+  const initial = await loadQuery<SanityDocument[]>(
+    POSTS_QUERY,
+    {},
+    {
+      perspective: draftMode().isEnabled ? "previewDrafts" : "published",
+    }
+  );
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-evenly p-24">
@@ -22,7 +30,11 @@ export default async function Home() {
       </div>
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <Posts posts={initial.data} />
+        {draftMode().isEnabled ? (
+          <PostPreview initial={initial} />
+        ) : (
+          <Posts posts={initial.data} />
+        )}
       </div>
     </main>
   );
